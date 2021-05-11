@@ -11,6 +11,6 @@ public interface FoodService {
 	public void insert(FoodVO foodVO);
 	public List<FoodDTO> selectAll();
 	public FoodDTO findByFood(String fo_fcode);
-	public void findBySize();
+	public List<FoodDTO> findBySize();
 	
 }

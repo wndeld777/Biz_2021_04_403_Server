@@ -14,7 +14,7 @@ import lombok.ToString;
 public class FoodVO {
 	 private String fo_seq;
 	 private String fo_date;
-	 private Integer fo_eat = 0;
+	 private String fo_eat;
 	 private String fo_fcode;		// 식품코드,
 	 private String fo_name;		// 식품명,
 	 private String fo_year;		// 출시연도,

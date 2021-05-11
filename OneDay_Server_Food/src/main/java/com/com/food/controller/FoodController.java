@@ -2,6 +2,7 @@ package com.com.food.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -43,15 +44,15 @@ public class FoodController extends HttpServlet{
 			foodVO.setFo_seq(fo_seq);
 			foodVO.setFo_date(fo_date);
 			foodVO.setFo_fcode(fo_fcode);
-			foodVO.setFo_eat(Integer.valueOf(fo_eat));
+			foodVO.setFo_eat(fo_eat);
 			
 			fService.insert(foodVO);
 			
 			out.println("받은 데이터 확인");
-			out.printf("일련번호 : %s" , fo_seq);
-			out.printf("날짜 : %s", fo_date);
-			out.printf("식품코드 : %s", fo_fcode);
-			out.printf("섭취량 : %s", fo_eat);
+			out.printf("일련번호 : %s" , foodVO.getFo_seq());
+			out.printf("날짜 : %s", foodVO.getFo_date());
+			out.printf("식품코드 : %s", foodVO.getFo_fcode());
+			out.printf("섭취량 : %s", foodVO.getFo_eat());
 			
 			out.close();
 		}else if(subPath.equals("/fcode")) {
@@ -63,8 +64,10 @@ public class FoodController extends HttpServlet{
 			RequestDispatcher disp = app.getRequestDispatcher("/WEB-INF/views/food.jsp");
 			disp.forward(req, resp);
 		}else if(subPath.equals("/list")) {
-			fService.selectAll();
-			out.println("식품 전체목록 보기");
+			List<FoodDTO> foodList  = fService.findBySize();
+			
+			req.setAttribute("DTOS", foodList);
+			req.getRequestDispatcher("/WEB-INF/views/list.jsp").forward(req, resp);
 		}
 	
 	

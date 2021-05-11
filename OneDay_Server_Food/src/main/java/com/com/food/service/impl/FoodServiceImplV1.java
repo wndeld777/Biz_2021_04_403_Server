@@ -26,16 +26,16 @@ public class FoodServiceImplV1 implements FoodService{
 		while(rSet.next()) {
 			FoodDTO foodDTO = new FoodDTO();
 			foodDTO.setFo_fcode(rSet.getString(DBInfo.FOOD.fo_fcode));
-			foodDTO.setFo_fcode(rSet.getString(DBInfo.FOOD.fo_fname));
-			foodDTO.setFo_fcode(rSet.getString(DBInfo.FOOD.fo_dname));
-			foodDTO.setFo_fcode(rSet.getString(DBInfo.FOOD.fo_vname));
-			foodDTO.setFo_fcode(rSet.getString(DBInfo.FOOD.fo_size));
-			foodDTO.setFo_fcode(rSet.getString(DBInfo.FOOD.fo_gram));
-			foodDTO.setFo_fcode(rSet.getString(DBInfo.FOOD.fo_kcal));
-			foodDTO.setFo_fcode(rSet.getString(DBInfo.FOOD.fo_protein));
-			foodDTO.setFo_fcode(rSet.getString(DBInfo.FOOD.fo_fat));
-			foodDTO.setFo_fcode(rSet.getString(DBInfo.FOOD.fo_carbo));
-			foodDTO.setFo_fcode(rSet.getString(DBInfo.FOOD.fo_sugars));
+			foodDTO.setFo_name(rSet.getString(DBInfo.FOOD.fo_name));
+			foodDTO.setFo_dname(rSet.getString(DBInfo.FOOD.fo_dname));
+			foodDTO.setFo_vname(rSet.getString(DBInfo.FOOD.fo_vname));
+			foodDTO.setFo_size(rSet.getString(DBInfo.FOOD.fo_size));
+			foodDTO.setFo_gram(rSet.getString(DBInfo.FOOD.fo_gram));
+			foodDTO.setFo_kcal(rSet.getString(DBInfo.FOOD.fo_kcal));
+			foodDTO.setFo_protein(rSet.getString(DBInfo.FOOD.fo_protein));
+			foodDTO.setFo_fat(rSet.getString(DBInfo.FOOD.fo_fat));
+			foodDTO.setFo_carbo(rSet.getString(DBInfo.FOOD.fo_carbo));
+			foodDTO.setFo_sugars(rSet.getString(DBInfo.FOOD.fo_sugars));
 			foodList.add(foodDTO);
 		}
 		rSet.close();
@@ -47,7 +47,7 @@ public class FoodServiceImplV1 implements FoodService{
 
 		String sql = " INSERT INTO tbl_myfoods ";
 		sql += " (mf_seq, mf_date, mf_fcode, mf_eat) ";
-		sql += " VALUSE(?,?,?,?) ";
+		sql += " VALUES(?,?,?,?) ";
 		System.out.println(sql);
 		
 		PreparedStatement pStr = null;
@@ -56,7 +56,7 @@ public class FoodServiceImplV1 implements FoodService{
 			pStr.setString(1, foodVO.getFo_seq());
 			pStr.setString(2, foodVO.getFo_date());
 			pStr.setString(3, foodVO.getFo_fcode());
-			pStr.setInt(4, foodVO.getFo_eat());
+			pStr.setString(4, foodVO.getFo_eat());
 			pStr.executeUpdate();
 			pStr.close();
 			
@@ -110,9 +110,24 @@ public class FoodServiceImplV1 implements FoodService{
 	}
 
 	@Override
-	public void findBySize() {
-		// TODO Auto-generated method stub
+	public List<FoodDTO> findBySize() {
+
+		String sql = " SELECT * FROM view_섭취정보 ";
+		PreparedStatement pStr = null;
+		try {
+			pStr = dbConn.prepareStatement(sql);
+			List<FoodDTO> foodList = this.select(pStr);
+			
+			if(foodList != null && foodList.size() > 0) {
+				pStr.close();
+				return foodList;
+			}
 		
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 }
