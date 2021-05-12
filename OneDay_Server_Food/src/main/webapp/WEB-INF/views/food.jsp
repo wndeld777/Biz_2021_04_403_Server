@@ -18,6 +18,8 @@
 		<a href="insert?fo_fcode=${FOOD.fo_fcode }&fo_name=${FOOD.fo_name}">
 		</a>
 		
+		</p>
+		</c:forEach>
 		
 
 </body>
