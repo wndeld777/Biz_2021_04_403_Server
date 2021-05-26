@@ -51,7 +51,7 @@ public class MyFoodServiceImplV1 implements MyFoodService{
 		PreparedStatement pStr =null;
 		try {
 			pStr = dbConn.prepareStatement(sql);
-			List<MyFoodCDTO> myList = this.select(pStr);
+			List<MyFoodCDTO> myList = this.select(pStr); 
 			pStr.close();
 			return myList;
 		} catch (SQLException e) {

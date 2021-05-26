@@ -31,7 +31,7 @@ homeController가 catcher 하도록 만들어져 있기 때문에
 	<h1>다이어트를 도와줘!!!</h1>
 	<%-- /diet/food/search --%>
 	<a href="${pageContext.request.contextPath }/food/search">섭취정보 등록</a>
-
+	
 	<div>
 		<form>
 			<label>날짜</label> <input name="mf_date">
