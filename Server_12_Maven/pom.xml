@@ -46,6 +46,8 @@
 			<artifactId>logback-classic</artifactId>
 			<version>1.2.3</version>
 			<scope>runtime</scope>
+			<!-- scope test를 runtime으로 바꾼다
+			slf4j 버전과 logback 버전이 맞아야 오류없이 작동함 -->
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
 		<dependency>
